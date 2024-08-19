@@ -1,4 +1,4 @@
-import { AntDesign } from '@expo/vector-icons';
+import { AntDesign, Feather } from '@expo/vector-icons';
 import React from 'react';
 import { TextInput, View, TextInputProps } from 'react-native';
 import tw from 'twrnc';
@@ -9,19 +9,22 @@ interface InputProps extends TextInputProps {
 }
 
 const Input: React.FC<InputProps> = ({ className, iconName, ...props }) => (
+  
   <View style={tw.style(`relative ${className || ''}`)}>
     {iconName && (
       <AntDesign
         name={iconName}
         size={30}
-        color="#000"
-        style={tw.style('absolute left-5 top-2 ')}
+        color="#FFFFF"
+        style={tw.style('absolute left-3 top-2 z-10 ')}
       />
     )}
+
     <TextInput
       style={tw.style(`pl-10 bg-white p-2 rounded ${className || ''}`)} 
       {...props}
     />
+
   </View>
 );
 
