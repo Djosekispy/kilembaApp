@@ -4,13 +4,18 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import tw from 'twrnc';
 import FormField from '@/components/Form/molecules/FormField';
 import CustomButton from '@/components/Form/atoms/Button';
-import { FormData, Loginschema } from '@/interfaces/ILoginForm';
 import { yupResolver } from "@hookform/resolvers/yup";
 import SocialMediaLogin from '@/components/Form/molecules/SocialMediaLogin';
 import Label from '@/components/Form/atoms/Label';
-import imageBacground from '@/assets/images/loginBg.jpg';
+import imageBacground from '@/assets/images/registrBg.jpg';
 import { Feather } from '@expo/vector-icons';
-import { Link, useRouter } from 'expo-router';
+import { RegisterFormData , Registerschema } from '@/interfaces/IRegisterForm';
+import { Link } from 'expo-router';
+import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
+import { auth, db } from '@/utils/firebase';
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
+import { FirebaseError } from 'firebase/app';
+import { errorMessages } from '@/utils/errostypes';
 
 
 
@@ -19,18 +24,43 @@ const Form: React.FC = () => {
         control,
         handleSubmit,
         formState: { errors },
-      } = useForm<FormData>({
-        resolver: yupResolver(Loginschema),
+      } = useForm<RegisterFormData>({
+        resolver: yupResolver(Registerschema),
       })
    const [ isLoading , setIsLoading ] = React.useState<boolean>(false);
    const [passwordVisible, setPasswordVisible] = React.useState(false);
-  const router = useRouter();
-  const onSubmit: SubmitHandler<FormData> = data => {
-    console.log(data);
+   const [error, setError] = React.useState<string>('');
+
+  const onSubmit: SubmitHandler<RegisterFormData> = async data => {
     setIsLoading(true);
-    setTimeout(()=>{
+
+    try {
+      const myUser = await createUserWithEmailAndPassword(
+        auth,
+        data.email,
+        data.password
+      );
+
+      const user = myUser.user;
+
+      await addDoc(collection(db, 'users'), {
+        username : data.username,
+        email : user.email,
+        password : user.uid,
+        createdAt : serverTimestamp(),
+      });
+   await sendEmailVerification(user);
+      
+    } catch (err) {
+      if (err instanceof FirebaseError) {
+        const errorMessage = errorMessages[err.code] || 'Ocorreu um erro desconhecido.';
+        setError(errorMessage);
+      } else {
+        setError(`Erro Desconhecido : ${err}`);
+      }
+    } finally {
       setIsLoading(false);
-    },2000)
+    }
   };
 
   return (
@@ -41,9 +71,22 @@ const Form: React.FC = () => {
     <View className='justify-center  backdrop-opacity-10 backdrop-invert bg-white/30 flex-1 px-8'>
 
 
-      <Label text='Login' className='text-[#000] font-semiBoldPopins text-3xl text-center pt-12' />
+      <Label text='Registrar-se' className='text-[#000] font-semiBoldPopins text-3xl text-center pt-12' />
+      { error && <Label text={error} className='text-[#fc2d2d]  font-semiBoldPopins text-sm text-center py-2' />}
      
       <FormField
+        control={control}
+        secure={false}
+        name="username"
+        rules={{ required: true }}
+        label="Nome"
+        boardType='default'
+        labelClassName="mb-2 text-[#000] font-regularPopins text-sm"
+        inputClassName={errors.email ? "mb-2 border-2 h-12 rounded-md border-[#fc2d2d] bg-[#091130] focus:bg-[#FFFFFF] pl-12" :"mb-2 border h-12 rounded-lg bg-[#6A6A6A]  focus:bg-[#FFFFFF] pl-12"}
+        icon='user'
+      />
+
+<FormField
         control={control}
         secure={false}
         name="email"
@@ -52,7 +95,7 @@ const Form: React.FC = () => {
         boardType='email-address'
         labelClassName="mb-2 text-[#000] font-regularPopins text-sm"
         inputClassName={errors.email ? "mb-2 border-2 h-12 rounded-md border-[#fc2d2d] bg-[#091130] focus:bg-[#FFFFFF] pl-12" :"mb-2 border h-12 rounded-lg bg-[#6A6A6A]  focus:bg-[#FFFFFF] pl-12"}
-        icon='user'
+        icon='paperclip'
       />
 <View className='relative'>
       <FormField
@@ -78,15 +121,15 @@ const Form: React.FC = () => {
 
       <CustomButton
       isLoading={isLoading}
-       title="Entrar" 
-       className='rounded-full bg-[#091130] mt-12 h-12 justify-center items-center'
+       title="Abrir Conta" 
+       className='rounded-full bg-[#091130] mt-8 h-12 justify-center items-center'
        onPress={handleSubmit(onSubmit)} 
        />
 
-<View className='w-full flex-row justify-between  items-baseline pt-4'>
-          <Label text='Esqueceu sua senha?' className='text-[#000]  font-semiBoldPopins text-sm text-center pt-2' />
-          <Link href={'/(auth)/register'} asChild>
-          <Label text='Criar Conta' className='text-[#000]  font-semiBoldPopins underline  text-sm text-center pt-2'/>
+        <View className='w-full flex-row justify-between mt-3'>
+                <Label text='Já tens uma conta?' className='text-[#000]  font-semiBoldPopins text-sm text-center' />
+        <Link href={'/(auth)/'} asChild>
+          <Label text='Login' className='text-[#000]  font-semiBoldPopins underline  text-sm text-center' />
           </Link>
           </View>
        <SocialMediaLogin/>

@@ -1,23 +1,27 @@
-import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
 import { getStorage } from "firebase/storage";
+import Config from 'react-native-config';
+import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
-
+import { getAuth,initializeAuth,getReactNativePersistence } from 'firebase/auth';
+import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const firebaseConfig = {
-  apiKey: process.env.API_KEY,
-  authDomain: process.env.AUTH_DOMAIN,
-  projectId: process.env.PROJECT_ID,
-  storageBucket: process.env.STORAGE_BUCKET,
-  messagingSenderId: process.env.MESSAGING_SNEDER_ID,
-  appId: process.env.APP_ID
+  apiKey: "AIzaSyBsQ3339Z_UadiOsKsPGdOp0LHEuMqsOEU",
+  authDomain: "kilemba-df33a.firebaseapp.com",
+  projectId: "kilemba-df33a",
+  storageBucket: "kilemba-df33a.appspot.com",
+  messagingSenderId: "877784344083",
+  appId: "1:877784344083:web:da5492792babbf52f3c1e6"
 };
 
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const auth = getAuth(app);
-const storage = getStorage(app);
-
-
+  
+  const auth = initializeAuth(app, {
+    persistence: getReactNativePersistence(ReactNativeAsyncStorage)
+  });
+  const db = getFirestore(app); 
+  
+  const storage = getStorage(app);
+  
 export { db, auth, storage }

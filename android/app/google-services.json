@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "877784344083",
+    "project_id": "kilemba-df33a",
+    "storage_bucket": "kilemba-df33a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:877784344083:android:6172a0506cfa6658f3c1e6",
+        "android_client_info": {
+          "package_name": "com.kilemba"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "877784344083-1ck98u13058fu5om9dovfm88cd57vqhs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDylbwnOBc-d0E-1HNlMAzuJJeESkmFFt4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "877784344083-1ck98u13058fu5om9dovfm88cd57vqhs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
