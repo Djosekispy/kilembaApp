@@ -10,15 +10,22 @@ import SocialMediaLogin from '@/components/Form/molecules/SocialMediaLogin';
 import Label from '@/components/Form/atoms/Label';
 import imageBacground from '@/assets/images/loginBg.jpg';
 import { Feather } from '@expo/vector-icons';
-import { Link, useRouter } from 'expo-router';
+import { Link } from 'expo-router';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '@/utils/firebase';
 import { FirebaseError } from 'firebase/app';
 import { errorMessages } from '@/utils/errostypes';
+import * as webBrowser from 'expo-web-browser';
+import { useOAuth } from '@clerk/clerk-expo';
+import { useRouter } from 'expo-router';
 
 
+
+webBrowser.maybeCompleteAuthSession();
 
 const Form: React.FC = () => {
+  const googleOAuth = useOAuth({ strategy : "oauth_google"});
+
     const {
         control,
         handleSubmit,
@@ -29,25 +36,56 @@ const Form: React.FC = () => {
    const [ isLoading , setIsLoading ] = React.useState<boolean>(false);
    const [error, setError] = React.useState<string>('');
    const [passwordVisible, setPasswordVisible] = React.useState(false);
-  const onSubmit: SubmitHandler<FormData> = async data => {
-    setIsLoading(true);
+   const router = useRouter();
+   async function onGoogleSignIn(){
+        try{
+          setIsLoading(true);
+          const oAuthFlow = await googleOAuth.startOAuthFlow();
 
-    try {
-      const user = await signInWithEmailAndPassword(auth,data.email, data.password);
-      const userData = user.user;
-    } catch (err) {
-    
-      if (err instanceof FirebaseError) {
-        const errorMessage = errorMessages[err.code] || 'Ocorreu um erro desconhecido.';
-        setError(errorMessage);
-      } else {
-        setError(`Erro Desconhecido : ${err}`);
-      }
-     
-    } finally {
-      setIsLoading(false);
+          if(oAuthFlow.authSessionResult?.type === "success"){
+              if(oAuthFlow.setActive){
+                await oAuthFlow.setActive({ session : oAuthFlow.createdSessionId })
+              }
+          }else{
+            setIsLoading(false)
+          }
+
+        }catch(err){
+
+        }finally{
+          setIsLoading(false)
+        }
+
     }
-  };
+
+    const onSubmit: SubmitHandler<FormData> = async data => {
+      setIsLoading(true);
+
+      try {
+        const user = await signInWithEmailAndPassword(auth,data.email, data.password);
+        const userData = user.user;
+        router.replace('/(app)/(tabs)/');
+      } catch (err) {
+      
+        if (err instanceof FirebaseError) {
+          const errorMessage = errorMessages[err.code] || 'Ocorreu um erro desconhecido.';
+          setError(errorMessage);
+        } else {
+          setError(`Erro Desconhecido : ${err}`);
+        }
+      
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+  React.useEffect(()=>{
+    webBrowser.warmUpAsync();
+
+    return ()=>{
+      webBrowser.coolDownAsync();
+    }
+  });
 
   return (
     
@@ -106,7 +144,7 @@ const Form: React.FC = () => {
           <Label text='Criar Conta' className='text-[#000]  font-semiBoldPopins underline  text-sm text-center pt-2'/>
           </Link>
           </View>
-       <SocialMediaLogin/>
+       <SocialMediaLogin SignInWithGoole={onGoogleSignIn} isLoading={isLoading}/>
        
     </View>
     </ImageBackground>

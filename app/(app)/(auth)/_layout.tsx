@@ -1,7 +1,6 @@
-import { Slot } from "expo-router";
+import { Slot } from 'expo-router'
 
+export default function AuthRoutesLayout() {
 
-
-export default function  AuthLayout(){
-    return <Slot/>;
+  return <Slot />
 }

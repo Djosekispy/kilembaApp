@@ -1,26 +1,22 @@
-import { AuthProvider } from '@/context/AuthContext';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
-import { Slot, Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import 'react-native-reanimated';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { ClerkProvider, ClerkLoaded, useAuth } from '@clerk/clerk-expo'
+import { Slot, useRouter } from 'expo-router'
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '@/utils/firebase';
 
 
-export {
-  
-  ErrorBoundary,
-} from 'expo-router';
+const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!
 
-export const unstable_settings = {
-  initialRouteName: '(auth)',
-};
+
 
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
+
   const [loaded, error] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
     regularPopins:  require('../assets/fonts/Poppins-Regular.ttf'),
@@ -43,16 +39,43 @@ export default function RootLayout() {
     return null;
   }
 
+
   return <RootLayoutNav />;
 }
 
 function RootLayoutNav() {
 
   return (
-    <AuthProvider>
-    <SafeAreaProvider>
-   <Slot/>
-   </SafeAreaProvider>
-  </AuthProvider>
+    <ClerkProvider publishableKey={publishableKey}>
+      <ClerkLoaded>
+        <InitialLayout />
+      </ClerkLoaded>
+    </ClerkProvider>
   );
+}
+
+function InitialLayout(){
+
+  const router = useRouter();
+  const [user, setUser] = React.useState<any>(null);
+
+
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+    }); 
+    return () => unsubscribe();
+  }, []);
+
+  useEffect(()=>{
+
+    if(user){
+      router.replace('/(app)/(tabs)/')
+    }else{
+      router.replace('/(app)/(auth)/')
+    }
+  },[user])
+
+  return  <Slot />
 }

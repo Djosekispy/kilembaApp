@@ -11,11 +11,12 @@ import imageBacground from '@/assets/images/registrBg.jpg';
 import { Feather } from '@expo/vector-icons';
 import { RegisterFormData , Registerschema } from '@/interfaces/IRegisterForm';
 import { Link } from 'expo-router';
-import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
+import { createUserWithEmailAndPassword, deleteUser, sendEmailVerification } from 'firebase/auth';
 import { auth, db } from '@/utils/firebase';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { FirebaseError } from 'firebase/app';
 import { errorMessages } from '@/utils/errostypes';
+import { useRouter } from 'expo-router';
 
 
 
@@ -30,7 +31,7 @@ const Form: React.FC = () => {
    const [ isLoading , setIsLoading ] = React.useState<boolean>(false);
    const [passwordVisible, setPasswordVisible] = React.useState(false);
    const [error, setError] = React.useState<string>('');
-
+   const router = useRouter();
   const onSubmit: SubmitHandler<RegisterFormData> = async data => {
     setIsLoading(true);
 
@@ -43,14 +44,22 @@ const Form: React.FC = () => {
 
       const user = myUser.user;
 
-      await addDoc(collection(db, 'users'), {
-        username : data.username,
-        email : user.email,
-        password : user.uid,
-        createdAt : serverTimestamp(),
-      });
-   await sendEmailVerification(user);
-      
+      sendEmailVerification(user)
+      .then(async () => {
+        await addDoc(collection(db, 'users'), {
+          username : data.username,
+          email : user.email,
+          password : user.uid,
+          createdAt : serverTimestamp(),
+        });
+        
+      router.replace('/(app)/(auth)/')
+      })
+      .catch(async (err)=>{
+      await deleteUser(user)
+      setError(`Informações inválidas : ${err}`);
+      })
+
     } catch (err) {
       if (err instanceof FirebaseError) {
         const errorMessage = errorMessages[err.code] || 'Ocorreu um erro desconhecido.';
