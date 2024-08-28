@@ -1,7 +1,7 @@
 import React from 'react';
 import { Controller, Control, FieldValues, Path } from 'react-hook-form';
 import Label from '../atoms/Label';
-import Input from '../atoms/Input';
+import { Input } from '../atoms/Input';
 import { AntDesign } from '@expo/vector-icons';
 import { KeyboardTypeOptions } from 'react-native';
 

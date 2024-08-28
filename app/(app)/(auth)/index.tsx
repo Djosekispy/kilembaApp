@@ -134,12 +134,14 @@ const Form: React.FC = () => {
       <CustomButton
       isLoading={isLoading}
        title="Entrar" 
-       className='rounded-full bg-[#091130] mt-12 h-12 justify-center items-center'
+       className='rounded-full bg-[#000] mt-12 h-12 justify-center items-center'
        onPress={handleSubmit(onSubmit)} 
        />
 
 <View className='w-full flex-row justify-between  items-baseline pt-4'>
+        <Link href={'/(app)/(auth)/forgetpassword'} asChild>
           <Label text='Esqueceu sua senha?' className='text-[#000]  font-semiBoldPopins text-sm text-center pt-2' />
+          </Link>
           <Link href={'/(auth)/register'} asChild>
           <Label text='Criar Conta' className='text-[#000]  font-semiBoldPopins underline  text-sm text-center pt-2'/>
           </Link>
