@@ -131,7 +131,7 @@ const Form: React.FC = () => {
       <CustomButton
       isLoading={isLoading}
        title="Abrir Conta" 
-       className='rounded-full bg-[#091130] mt-8 h-12 justify-center items-center'
+       className='rounded-full bg-[#000] mt-8 h-12 justify-center items-center'
        onPress={handleSubmit(onSubmit)} 
        />
 

@@ -15,16 +15,10 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '@/utils/firebase';
 import { FirebaseError } from 'firebase/app';
 import { errorMessages } from '@/utils/errostypes';
-import * as webBrowser from 'expo-web-browser';
-import { useOAuth } from '@clerk/clerk-expo';
 import { useRouter } from 'expo-router';
 
 
-
-webBrowser.maybeCompleteAuthSession();
-
 const Form: React.FC = () => {
-  const googleOAuth = useOAuth({ strategy : "oauth_google"});
 
     const {
         control,
@@ -37,26 +31,8 @@ const Form: React.FC = () => {
    const [error, setError] = React.useState<string>('');
    const [passwordVisible, setPasswordVisible] = React.useState(false);
    const router = useRouter();
-   async function onGoogleSignIn(){
-        try{
-          setIsLoading(true);
-          const oAuthFlow = await googleOAuth.startOAuthFlow();
 
-          if(oAuthFlow.authSessionResult?.type === "success"){
-              if(oAuthFlow.setActive){
-                await oAuthFlow.setActive({ session : oAuthFlow.createdSessionId })
-              }
-          }else{
-            setIsLoading(false)
-          }
-
-        }catch(err){
-
-        }finally{
-          setIsLoading(false)
-        }
-
-    }
+      const onGoogleSignIn =  ()=>alert("Funcionalidade inactiva")
 
     const onSubmit: SubmitHandler<FormData> = async data => {
       setIsLoading(true);
@@ -79,13 +55,7 @@ const Form: React.FC = () => {
       }
     };
 
-  React.useEffect(()=>{
-    webBrowser.warmUpAsync();
 
-    return ()=>{
-      webBrowser.coolDownAsync();
-    }
-  });
 
   return (
     

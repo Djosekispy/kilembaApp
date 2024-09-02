@@ -2,7 +2,7 @@ import React from "react";
 import { Image, ImageSourcePropType } from "react-native";
 
 type ImageAtomProps = {
-  source: ImageSourcePropType;
+  source?: ImageSourcePropType;
   className?: string;
 };
 

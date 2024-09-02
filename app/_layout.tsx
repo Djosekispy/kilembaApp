@@ -3,14 +3,13 @@ import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import React, { useEffect } from 'react';
 import 'react-native-reanimated';
-import { ClerkProvider, ClerkLoaded, useAuth } from '@clerk/clerk-expo'
 import { Slot, useRouter } from 'expo-router'
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '@/utils/firebase';
 import { StatusBar } from 'react-native';
 
 
-const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!
+//const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!
 
 
 
@@ -48,12 +47,10 @@ function RootLayoutNav() {
 
   return (
     
-    <ClerkProvider publishableKey={publishableKey}>
-      <ClerkLoaded>
+    <>
       <StatusBar backgroundColor={'transparent'} translucent={true} barStyle={'dark-content'}/>
         <InitialLayout />
-      </ClerkLoaded>
-    </ClerkProvider>
+ </>
   );
 }
 
