@@ -2,12 +2,12 @@ import React from "react";
 import { Image, ImageSourcePropType } from "react-native";
 
 type ImageAtomProps = {
-  source?: ImageSourcePropType;
+  source?: string;
   className?: string;
 };
 
 const ImageAtom: React.FC<ImageAtomProps> = ({ source, className, ...rest }) => {
-  return <Image source={source} className={className} {...rest} resizeMode="cover"/>;
+  return <Image source={{uri: source}} className={className} {...rest} resizeMode="contain"/>;
 };
 
 export default ImageAtom;
