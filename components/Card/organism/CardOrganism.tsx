@@ -8,7 +8,7 @@ import { Link } from 'expo-router';
 
 type CardOrganismProps = {
   id: string;
-  imageSource: ImageSourcePropType;
+  imageSource: string;
   name: string;
   price: string;
   location: string;
@@ -21,7 +21,7 @@ const CardOrganism: React.FC<CardOrganismProps> = ({ id, imageSource, name, pric
     <View className="bg-white rounded-lg p-2 ml-4">
        
         <View className='w-60 h-40 rounded-md'>
-        <ImageAtom className='w-full h-full rounded-md' source={{uri : imageSource}} />
+        <ImageAtom className='w-full h-full rounded-md' source={imageSource} />
         </View>
       <View className="mt-4">
       <Link href={`/(app)/(main)/${id}`}>

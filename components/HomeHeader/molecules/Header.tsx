@@ -6,6 +6,7 @@ import picture from '@/assets/images/loginBg.jpg';
 
 export default function Header() {
     const user = auth.currentUser;
+    const urlAvatar = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_kSSoomJ9hiFXmiF2RdZlwx72Y23XsT6iwQ&s'
     return (
         <View className='flex-row space-x-20 px-8 pt-12'>
             <View> 
@@ -14,7 +15,7 @@ export default function Header() {
             </View>
             <View className='w-20 h-20 rounded-full items-center justify-center bg-cover'>
                 <ImageAtom
-                    source={picture || user?.photoURL}
+                    source={user?.photoURL || urlAvatar}
                     className="w-16 h-16 rounded-full"
                 />
             </View>

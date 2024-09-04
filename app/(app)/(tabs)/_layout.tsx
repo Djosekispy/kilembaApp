@@ -23,7 +23,7 @@ export default function TabLayout() {
       screenOptions={{
        headerShown: false,
       tabBarActiveTintColor: '#01579b',
-      tabBarInactiveBackgroundColor:'#efebe9',
+      tabBarInactiveBackgroundColor:'#FFF',
       tabBarActiveBackgroundColor:'#cfd8dc',
      tabBarStyle:{
       marginTop:0
@@ -36,6 +36,13 @@ export default function TabLayout() {
         options={{
           title: '',
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
+        }}
+      />
+        <Tabs.Screen
+        name="subscribe"
+        options={{
+          title: '',
+          tabBarIcon: ({ color }) => <TabBarIcon name="book" color={color} />,
         }}
       />
   </Tabs>

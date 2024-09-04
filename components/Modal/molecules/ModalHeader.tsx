@@ -6,7 +6,7 @@ import Title from "../atoms/title";
 
 type ModalHeaderProps = {
   title: string;
-  imageSource: ImageSourcePropType;
+  imageSource: string;
   className?: string;
 };
 

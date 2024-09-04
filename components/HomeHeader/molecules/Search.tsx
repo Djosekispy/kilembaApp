@@ -1,13 +1,14 @@
 import { InputMaterialIcons } from '@/components/Form/atoms/Input';
 import React from 'react';
-import { TextInput, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, TextInput, TouchableOpacity, View } from 'react-native';
 import IconButtom from '../atoms/IconButtom';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 interface ISearch {
-    findOne : ()=>void
+    findOne : (text: string)=>void
+    isLoading: boolean
 }
 
-export default function Search({ findOne }: ISearch) {
+export default function Search({ findOne , isLoading}: ISearch) {
   const [query, setQuery] = React.useState('');
 
   return (
@@ -34,11 +35,15 @@ export default function Search({ findOne }: ISearch) {
       </View>
       <View className="flex justify-center items-center p-2">
         <View className="rounded-md bg-[#308DFF] p-2">
-            <TouchableOpacity>
-          <IconButtom
+            <TouchableOpacity onPress={()=>findOne(query)} disabled={isLoading}>
+        { isLoading ? 
+        <ActivityIndicator size={35} color={'#FFF'} />
+        : <IconButtom
             iconName="filter"
             className="rounded-md text-white"
           />
+          
+          }
           </TouchableOpacity>
         </View>
       </View>

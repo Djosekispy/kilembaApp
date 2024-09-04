@@ -5,7 +5,7 @@ interface House {
         nome: string;
         tipo: string;
         descricao: string;
-        imagem: ImageSourcePropType;
+        imagem: string;
       
 }
 

@@ -19,14 +19,15 @@ const onClose = () => setIsFullScreen(false)
       <TouchableOpacity onPress={() => setIsFullScreen(true)}>
         <Image 
           source={{ uri: imagem }} 
-          className="w-20 h-20 rounded-full mr-8"
+          className="w-14 h-14 rounded-full mr-8"
         />
       </TouchableOpacity>
       
-      <View className="flex-col justify-center">
-        <Text className="font-semiBoldPopins text-lg">{nome}</Text>
-        <HouseAtom address={tipo} />
-        <LocationMolecule location={endereco} />
+      <View className="flex-col justify-center ">
+        <Text  className="font-regularPopins text-md text-ellipsis overflow-hidden" 
+        numberOfLines={1} 
+        ellipsizeMode="tail">{nome}</Text>
+          <HouseAtom address={tipo} />
       </View>
 
       <FullScreenImage 

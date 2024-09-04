@@ -2,45 +2,23 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, FlatList } from 'react-native';
 import { collection, query, onSnapshot } from "firebase/firestore";
 import { auth, db } from '@/utils/firebase';
-import { updateDocument } from '../atoms/updateDocument';
-import CandidateListItem from '../molecules/CandidateListItem';
-import DocumentActions from '../molecules/DocumentActions';
 import { UserProps } from '@/interfaces/ICandidate';
+import { updateDocument } from '@/components/candidateList/atoms/updateDocument';
+import CandidateListItem from '@/components/candidateList/molecules/CandidateListItem';
+import DocumentActions from '@/components/candidateList/molecules/DocumentActions';
+import Label from '@/components/Form/atoms/Label';
 
+interface SearchListProps {
+    candidatos: UserProps[];
+    clean:()=>void
+  }
+  
+  const SearchList: React.FC<SearchListProps> = ({ candidatos, clean }) => {
 
-
-const CandidateList: React.FC = () => {
   const user = auth.currentUser;
   const urlAvatar = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_kSSoomJ9hiFXmiF2RdZlwx72Y23XsT6iwQ&s'
-  
-  const [candidatos, setCandidatos] = useState<UserProps[]>([]);
 
   const getAdmin = auth?.currentUser?.email;
-
-  useEffect(() => {
-    const q = query(collection(db, "candidatos"));
-    const unsubscribeData = onSnapshot(q, (querySnapshot) => {
-      const modulo: UserProps[] = [];
-      querySnapshot.forEach((doc) => {
-        modulo.push({
-          id: doc.id,
-          nome: doc.data().nome,
-          telefone: doc.data().telefone,
-          endereco: doc.data().endereco,
-          bilhete: doc.data().bilhete,
-          certificado: doc.data().certificado,
-          residencia: doc.data().residencia,
-          tipo: doc.data().tipo,
-          estado: doc.data().estado,
-          perfilUrl: doc.data().perfilUrl
-        });
-      });
-      setCandidatos(modulo);
-    });
-    return () => unsubscribeData();
-  }, []);
-
-
 
   const aprovarCandidato = async (documentId: string) => {
     const updatedData = { estado: 'aprovado' };
@@ -81,10 +59,10 @@ const CandidateList: React.FC = () => {
   );
 
   return (
-    <View className="p-2">
+    <View className="p-2 w-full">
      <View className='flex-row justify-between mb-1'>
-     <Text className="text-xl font-bold text-[#122D4D]"> Candidatos</Text>
-     <Text className="text-sm font-semiBoldPopins text-[#989898] "> Mais </Text>
+     <Text className="text-xl font-bold text-[#122D4D]"> Resultados</Text>
+        <Label  text='Voltar' className='text-sm font-semiBoldPopins text-[#989898]' onPress={clean}/>
      </View>
       <FlatList
         data={candidatos}
@@ -97,4 +75,4 @@ const CandidateList: React.FC = () => {
   );
 };
 
-export default CandidateList;
+export default SearchList;

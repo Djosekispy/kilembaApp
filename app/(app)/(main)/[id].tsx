@@ -61,7 +61,7 @@ export default function HouseDetails() {
                 <MaterialIcons name="arrow-back" style={{position: 'absolute', top: 40, left: 20, zIndex:1}}  size={26} color="black" onPress={()=>router.back()}/>
                  
                     <View style={{ width: width, height: height - 300 }}>
-                        <ImageAtom className="w-full h-full" source={data?.imagem as string} />
+                        <ImageAtom className="w-full h-full" source={data?.imagem} />
                     </View>
                     <View className='flex-row justify-between mb-4 px-4'>
                         <View>

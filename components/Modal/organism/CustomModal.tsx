@@ -8,7 +8,7 @@ type CustomModalProps = {
   visible: boolean;
   onClose: () => void;
   title: string;
-  imageSource: ImageSourcePropType;
+  imageSource: string;
   children: React.ReactNode;
   className?: string;
 };
