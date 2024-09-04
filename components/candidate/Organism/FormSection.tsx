@@ -49,7 +49,8 @@ export default function Candiating(){
     const [certificadoFile, setCertificadoFile ] = React.useState('')
     const [residenciaFile, setResidenciaFile] = React.useState('')
     const [profileFile, setProfileFile] = React.useState('')
-
+      const getAdmin = auth?.currentUser?.email;
+     getAdmin === 'globof129@gmail.com'
       
     const [ isLoading , setIsLoading ] = React.useState(false)
 
@@ -173,6 +174,8 @@ export default function Candiating(){
 
     return (
         <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
+          
+ {  getAdmin !== 'globof129@gmail.com' &&         <>
          { candidate && candidate?.length > 0 ?
         ( <AlradyCandidated
           estado={candidate[0].estado}
@@ -304,6 +307,12 @@ export default function Candiating(){
             </>
           )
             }
+</>
+}
+      <View className="flex-1 justify-center items-center pt-64">
+      <Title className="text-[#000929] text-2xl font-semiBoldPopins">Ficha de Candidatura</Title>
+        <Label text='Área reservada apenas para Candidatos' className='text-[#8C8C8C] text-lg' />
+      </View>
         </ScrollView>
       
     );

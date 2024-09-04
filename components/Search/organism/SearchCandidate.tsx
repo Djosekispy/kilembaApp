@@ -36,7 +36,7 @@ interface SearchListProps {
         endereco={item.endereco}
         nome={item.nome}
         tipo={item.tipo}
-        imagem={item.perfilUrl || user?.photoURL || urlAvatar}
+        imagem={item.perfilUrl  || urlAvatar}
       />
       {getAdmin === 'globof129@gmail.com' && item.estado === "pendente" && (
         <>
@@ -45,11 +45,11 @@ interface SearchListProps {
             residencia={item.residencia}
             certificado={item.certificado}
           />
-          <View className="flex-row justify-around mt-2">
-            <TouchableOpacity onPress={() => aprovarCandidato(item.id)}>
-              <Text className="text-green-500">Aprovar</Text>
+          <View className="flex-row justify-around  mt-2">
+            <TouchableOpacity className='w-32 bg-[#8694A6] justify-center items-center p-2 rounded-md' onPress={() => aprovarCandidato(item.id)}>
+              <Text className="text-[#2A2B3F]">Aprovar</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => reprovadarCandidato(item.id)}>
+            <TouchableOpacity className='p-2 w-32 bg-[#8C8C8C] justify-center items-center rounded-md' onPress={() => reprovadarCandidato(item.id)}>
               <Text className="text-red-500">Rejeitar</Text>
             </TouchableOpacity>
           </View>
