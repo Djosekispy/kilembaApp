@@ -2,7 +2,7 @@ import React, { Suspense, useEffect } from 'react'
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Tabs } from 'expo-router';
 import {StatusBar} from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
+import { Feather, MaterialIcons } from '@expo/vector-icons';
 
 
 
@@ -45,6 +45,13 @@ export default function TabLayout() {
         options={{
           title: '',
           tabBarIcon: ({ color, size }) => <MaterialIcons name="admin-panel-settings" size={size} color={color} />,
+        }}
+      />
+         <Tabs.Screen
+        name="selected"
+        options={{
+          title: '',
+          tabBarIcon: ({ color, size }) => <Feather name="paperclip"  size={size} color={color}/> ,
         }}
       />
   </Tabs>

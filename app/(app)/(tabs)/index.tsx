@@ -58,6 +58,8 @@ export default function Page() {
       setIsLoading(false)
     }
   };
+
+  
   return (
     <ScrollView className='flex-1' showsVerticalScrollIndicator={false} >
      <View className="justify-center items-center ">

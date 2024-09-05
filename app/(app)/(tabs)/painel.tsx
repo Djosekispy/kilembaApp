@@ -97,7 +97,9 @@ export default function Painel(){
       for (let i = 0; i < 200; i++) {
          await addDoc(collection(db, 'apartamentosSorteados'), {
            nome: sorteadosApartamento[i].nome,
-           referencia: sorteadosApartamento[i].referencia
+           referencia: sorteadosApartamento[i].referencia,
+           telefone: sorteadosApartamento[i].telefone,
+           endereco: sorteadosApartamento[i].endereco
          });
          await updateDoc(doc(db, 'candidatos', sorteadosApartamento[i].id), {
            sorteado: true
@@ -136,7 +138,9 @@ export default function Painel(){
         for (let i = 0; i < 200; i++) {
          await addDoc(collection(db, 'geminadasSorteados'), {
            nome: sorteadosVivendas[i].nome,
-           referencia: sorteadosVivendas[i].referencia
+           referencia: sorteadosVivendas[i].referencia,
+           telefone: sorteadosVivendas[i].telefone,
+           endereco: sorteadosVivendas[i].endereco
          });
          await updateDoc(doc(db, 'candidatos', sorteadosVivendas[i].id), {
            sorteado: true
@@ -168,7 +172,9 @@ export default function Painel(){
        for (let i = 0; i < 200; i++) {
          await addDoc(collection(db, 'insoladasSorteados'), {
            nome: sorteadosVivendas[i].nome,
-           referencia: sorteadosVivendas[i].referencia
+           referencia: sorteadosVivendas[i].referencia,
+           telefone: sorteadosVivendas[i].telefone,
+           endereco: sorteadosVivendas[i].endereco
          });
          await updateDoc(doc(db, 'candidatos', sorteadosVivendas[i].id), {
            sorteado: true
@@ -197,7 +203,6 @@ export default function Painel(){
        TotaldeInscrito();
        totalPorVivendasGeminadas();
        totalPorVivendasInsoladas();
-   
        /*Sorteio Realizados*/
        verificaSorteioFeito('apartamentosSorteados').then((sorteioFeito) => {
          setSorteiodeApartamentosRealizado(sorteioFeito);
@@ -239,6 +244,7 @@ export default function Painel(){
    <Label text="Geminadas" className="font-regularPopins text-sm"/>
     </TouchableOpacity>
     </View> 
+    
     <View className='flex-row justify-between'>
     <PainelCard 
   tipo='Apartamentos' 
