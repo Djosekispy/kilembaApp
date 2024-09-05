@@ -12,6 +12,8 @@ import CandidateList from '@/components/candidateList/organism/CandidateList';
 import { UserProps } from '@/interfaces/ICandidate';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import SearchList from '@/components/Search/organism/SearchCandidate';
+import { TouchableOpacity } from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
 
 const scrollItens = ['Recomendado','Mais solicitado','Melhor Oferta','Mais accessivéis']
 
@@ -61,8 +63,9 @@ export default function Page() {
 
   
   return (
+    <View className='flex-1 relative' >
     <ScrollView className='flex-1' showsVerticalScrollIndicator={false} >
-     <View className="justify-center items-center ">
+     <View className="justify-center items-center">
       < Header/>
     <Search findOne={searchCandidateByName} isLoading={isLoading}/>
 
@@ -76,14 +79,15 @@ export default function Page() {
             <CardList />
             </>
             }
+          
             </View>
-
+          
     {searchingData.length < 1  &&  <CandidateList />}
   
-
-  <Button title="Logout" onPress={handleLogout} />
-    
-
     </ScrollView>
+    <TouchableOpacity onPress={handleLogout} className='p-2 justify-center items-center bg-[#f8bbd0] rounded-full' style={{position: 'absolute',zIndex: 1, bottom : 20, right : 20}}>
+            <AntDesign name="logout" size={24} color="black" />
+            </TouchableOpacity>
+    </View>
   )
 }

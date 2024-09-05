@@ -84,7 +84,7 @@ const CandidateList: React.FC = () => {
     <View className="p-2">
      <View className='flex-row justify-between mb-1'>
      <Text className="text-xl font-bold text-[#122D4D]"> Candidatos</Text>
-     <Text className="text-sm font-semiBoldPopins text-[#989898] "> Mais </Text>
+     <Text className="text-sm font-semiBoldPopins text-[#989898] "> Total : {candidatos.length} </Text>
      </View>
       <FlatList
         data={candidatos}

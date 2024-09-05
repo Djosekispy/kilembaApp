@@ -2,7 +2,8 @@ import PainelCard from '@/components/Admin/molecules/PainelCard';
 import CandidateList from '@/components/candidateList/organism/CandidateList';
 import Label from '@/components/Form/atoms/Label';
 import Title from '@/components/Modal/atoms/title';
-import { db } from '@/utils/firebase';
+import { auth, db } from '@/utils/firebase';
+import { useRouter } from 'expo-router';
 import {
     doc,
     setDoc,
@@ -26,6 +27,10 @@ export default function Painel(){
     const [vivendasGeminadas, setVivendasGeminadas] = useState([]);
     const [candidatos, setCandidatos] = useState([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const getAdmin = auth?.currentUser?.email;
+    const router = useRouter();
+    
+     
    
      const [sorteiodeApartamentosRealizado, setSorteiodeApartamentosRealizado] = useState(false);
      const [sorteiodeVivendasGeminadasRealizado, setSorteiodeVivendasGeminadasRealizado ] = useState(false);
@@ -196,9 +201,9 @@ export default function Painel(){
      return !querySnapshot.empty;
    }
    
-   
-   
+  
    useEffect(()=>{
+
       totalPorApatamentos();
        TotaldeInscrito();
        totalPorVivendasGeminadas();
@@ -221,7 +226,7 @@ export default function Painel(){
    },[]);
     return(
         <ScrollView className='flex-1' showsVerticalScrollIndicator={false}>
-            <View className='flex-1 items-center pt-12 px-4'>
+          {getAdmin === 'globof129@gmail.com' ?<>  <View className='flex-1 items-center pt-12 px-4'>
                 <Title className="text-[#000929] text-2xl font-semiBoldPopins">Painel de Gestão</Title>
                 <Label className="text-[#616161] text-sm text-center pt-2" text='Administre o sistema com responsabilidade e a justiça virá em bónus' />
             </View>
@@ -264,7 +269,13 @@ export default function Painel(){
     <View className='w-full'>
     <CandidateList />
     </View>
-</View>
+    </View></>
+    :  <View className="flex-1 justify-center items-center pt-64">
+      <Title className="text-[#000929] text-2xl font-semiBoldPopins">Indisponível</Title>
+        <Label text='Área Restricta' className='text-[#8C8C8C] text-lg' />
+      </View>
+      }
+
         </ScrollView>
     );
 }

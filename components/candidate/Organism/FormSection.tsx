@@ -309,10 +309,10 @@ export default function Candiating(){
             }
 </>
 }
-      <View className="flex-1 justify-center items-center pt-64">
+     {getAdmin === 'globof129@gmail.com' &&   <View className="flex-1 justify-center items-center pt-64">
       <Title className="text-[#000929] text-2xl font-semiBoldPopins">Ficha de Candidatura</Title>
         <Label text='Área reservada apenas para Candidatos' className='text-[#8C8C8C] text-lg' />
-      </View>
+      </View>}
         </ScrollView>
       
     );
