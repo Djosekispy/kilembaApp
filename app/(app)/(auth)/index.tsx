@@ -76,7 +76,7 @@ const Form: React.FC = () => {
         label="E-mail"
         boardType='email-address'
         labelClassName="mb-2 text-[#000] font-regularPopins text-sm"
-        inputClassName={errors.email ? "mb-2 border-2 h-12 rounded-md border-[#fc2d2d] bg-[#091130] focus:bg-[#FFFFFF] pl-12" :"mb-2 border h-12 rounded-lg bg-[#6A6A6A]  focus:bg-[#FFFFFF] pl-12"}
+        inputClassName={errors.email ? "mb-2 border-2 h-12 rounded-md border-[#fc2d2d]  bg-[#fafafa] focus:bg-[#FFFFFF] pl-12" :"mb-2 border-1 h-12 rounded-lg bg-[#616161]  focus:bg-[#FFFFFF] pl-12"}
         icon='user'
       />
 <View className='relative'>
@@ -87,7 +87,7 @@ const Form: React.FC = () => {
         rules={{ required: true }}
         label="Palavra Passe"
         labelClassName="mb-2 mt-6 font-regularPopins text-sm text-[#000]"
-        inputClassName={errors.password ? "mb-2 border h-12 rounded-md border-[#fc2d2d] bg-[#091130] pl-12" :"mb-2 border-2  h-12 rounded-lg bg-[#6A6A6A] border-[#5C5C5C]  focus:bg-[#FFFFFF] pl-12"}
+        inputClassName={errors.password ? "mb-2 border-2 h-12 rounded-md border-[#fc2d2d]  bg-[#fafafa] pl-12" :"mb-2 border-1  h-12 rounded-lg bg-[#616161] border-[#5C5C5C]  focus:bg-[#FFFFFF] pl-12"}
         secure={!passwordVisible}
         icon='key' />
 
@@ -104,7 +104,7 @@ const Form: React.FC = () => {
       <CustomButton
       isLoading={isLoading}
        title="Entrar" 
-       className='rounded-full bg-[#000] mt-12 h-12 justify-center items-center'
+       className='justify-center items-center rounded-2xl bg-[#000] p-2 w-full mt-4'
        onPress={handleSubmit(onSubmit)} 
        />
 
@@ -116,7 +116,6 @@ const Form: React.FC = () => {
           <Label text='Criar Conta' className='text-[#000]  font-semiBoldPopins underline  text-sm text-center pt-2'/>
           </Link>
           </View>
-       <SocialMediaLogin SignInWithGoole={onGoogleSignIn} isLoading={isLoading}/>
        
     </View>
     </ImageBackground>

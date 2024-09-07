@@ -73,7 +73,7 @@ function InitialLayout(){
     if(user){
       router.replace('/(app)/(tabs)/')
     }else{
-      router.replace('/(app)/(auth)/')
+      router.replace('/(app)/(enter)/')
     }
   },[user])
 

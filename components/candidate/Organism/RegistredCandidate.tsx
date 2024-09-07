@@ -36,7 +36,7 @@ export default function AlradyCandidated({estado,nome,telefone,endereco,bilhete,
                 </TouchableOpacity>
               </View>
               <View className='flex-row items-end my-2 p-2 rounded-md bg-[#B9B9B9]'>
-                            <Label text={`Estado da Candidatura : ${estado}` || 'Estado desconhecido'} className="ml-1 text-[#478FF1] font-regularPopins" />
+                            <Label text={`Estado da Candidatura : ${estado.toLocaleUpperCase()}` || 'Estado desconhecido'} className={`ml-1 ${estado === 'reprovado' ? 'text-[#d50000]' : 'text-[#478FF1]' } font-regularPopins`} />
                         </View>
               <View className="w-full px-4">
                 

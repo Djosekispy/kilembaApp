@@ -80,8 +80,8 @@ export default function HouseDetails() {
                         <CustomButton
                             isLoading={isLoading}
                             title="Concorrer"
-                            className="rounded-full bg-[#006EFF] w-full  my-4 h-12 justify-center items-center"
-                            onPress={() => console.log('Certo')}
+                            className="rounded-full bg-[#000] w-full  my-4 h-12 justify-center items-center"
+                            onPress={() => router.replace('/(app)/(tabs)/subscribe')}
                         />
                     </View>
                 </View>

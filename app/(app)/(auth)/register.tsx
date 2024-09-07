@@ -80,7 +80,7 @@ const Form: React.FC = () => {
     <View className='justify-center  backdrop-opacity-10 backdrop-invert bg-white/30 flex-1 px-8'>
 
 
-      <Label text='Registrar-se' className='text-[#000] font-semiBoldPopins text-3xl text-center pt-12' />
+      <Label text='Criar Conta' className='text-[#000] font-semiBoldPopins text-3xl text-center pt-12' />
       { error && <Label text={error} className='text-[#fc2d2d]  font-semiBoldPopins text-sm text-center py-2' />}
      
       <FormField
@@ -91,7 +91,7 @@ const Form: React.FC = () => {
         label="Nome"
         boardType='default'
         labelClassName="mb-2 text-[#000] font-regularPopins text-sm"
-        inputClassName={errors.email ? "mb-2 border-2 h-12 rounded-md border-[#fc2d2d] bg-[#091130] focus:bg-[#FFFFFF] pl-12" :"mb-2 border h-12 rounded-lg bg-[#6A6A6A]  focus:bg-[#FFFFFF] pl-12"}
+        inputClassName={errors.email ? "mb-2 border-2 h-12 rounded-md border-[#fc2d2d] bg-[#fafafa]  focus:bg-[#FFFFFF] pl-12" :"mb-2 border-1 h-12 rounded-lg bg-[#616161]   focus:bg-[#FFFFFF] pl-12"}
         icon='user'
       />
 
@@ -103,7 +103,7 @@ const Form: React.FC = () => {
         label="E-mail"
         boardType='email-address'
         labelClassName="mb-2 text-[#000] font-regularPopins text-sm"
-        inputClassName={errors.email ? "mb-2 border-2 h-12 rounded-md border-[#fc2d2d] bg-[#091130] focus:bg-[#FFFFFF] pl-12" :"mb-2 border h-12 rounded-lg bg-[#6A6A6A]  focus:bg-[#FFFFFF] pl-12"}
+        inputClassName={errors.email ? "mb-2 border-2 h-12 rounded-md border-[#fc2d2d] bg-[#fafafa]  focus:bg-[#FFFFFF] pl-12" :"mb-2 border-1 h-12 rounded-lg bg-[#616161]   focus:bg-[#FFFFFF] pl-12"}
         icon='paperclip'
       />
 <View className='relative'>
@@ -114,7 +114,7 @@ const Form: React.FC = () => {
         rules={{ required: true }}
         label="Palavra Passe"
         labelClassName="mb-2 mt-6 font-regularPopins text-sm text-[#000]"
-        inputClassName={errors.password ? "mb-2 border h-12 rounded-md border-[#fc2d2d] bg-[#091130] pl-12" :"mb-2 border-2  h-12 rounded-lg bg-[#6A6A6A] border-[#5C5C5C]  focus:bg-[#FFFFFF] pl-12"}
+        inputClassName={errors.password ? "mb-2 border-2 h-12 rounded-md border-[#fc2d2d] bg-[#fafafa]  pl-12" :"mb-2 border-1  h-12 rounded-lg bg-[#616161]  border-[#5C5C5C]  focus:bg-[#FFFFFF] pl-12"}
         secure={!passwordVisible}
         icon='key' />
 
@@ -130,8 +130,8 @@ const Form: React.FC = () => {
 
       <CustomButton
       isLoading={isLoading}
-       title="Abrir Conta" 
-       className='rounded-full bg-[#000] mt-8 h-12 justify-center items-center'
+       title="Registar" 
+       className='justify-center items-center rounded-2xl bg-[#000] p-2 w-full mt-4'
        onPress={handleSubmit(onSubmit)} 
        />
 
@@ -141,7 +141,6 @@ const Form: React.FC = () => {
           <Label text='Login' className='text-[#000]  font-semiBoldPopins underline  text-sm text-center' />
           </Link>
           </View>
-       <SocialMediaLogin/>
        
     </View>
     </ImageBackground>

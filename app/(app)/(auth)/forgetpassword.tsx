@@ -30,9 +30,15 @@ export default function ForgetPassword() {
     };
     
     const handleSubmit = async () => {
-        setIsLoading(true);
+      
+        if(!email){
+            setError('O campo E-mail é obrigatório!')
+            setIsLoading(false);
+            return;
+        }
       
         try {
+            setIsLoading(true);
             const usersRef = collection(db, "users");
 
             const q = query(usersRef, where("email", "==", email));
@@ -89,7 +95,8 @@ export default function ForgetPassword() {
                     { error && <Label text={error} className='text-[#fc2d2d]  rounded-xl font-semiBoldPopins text-sm text-center py-2' />}
      
                         <InputMaterialIcons
-                            className="w-full h-12 rounded-md border-2 border-[#000] my-4 px-12"
+                            className={error ? "w-full h-12 rounded-md border-2  my-4 px-12 border-[#fc2d2d] bg-[#fafafa]  focus:bg-[#FFFFFF] pl-12" :" w-full  border-2 border-[#000] my-4 px-12 mb-2 border-1 h-12 rounded-lg bg-[#616161]   focus:bg-[#FFFFFF] pl-12"}
+                           
                             iconName="email"
                             placeholder="example@gmail.com"
                             keyboardType="email-address"
@@ -99,7 +106,7 @@ export default function ForgetPassword() {
                     <CustomButton
                         isLoading={isLoading}
                         title="Proximo"
-                        className="rounded-full bg-[#000] w-full mt-12 h-12 justify-center items-center"
+                        className='justify-center items-center rounded-2xl bg-[#000] p-2 w-full mt-4'
                         onPress={handleSubmit}
                     />
                 </View>

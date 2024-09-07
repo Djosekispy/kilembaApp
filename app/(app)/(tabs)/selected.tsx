@@ -153,8 +153,8 @@ export default function Selected(){
                 <Title className="text-[#000929] text-2xl font-semiBoldPopins">Sorteados</Title>
                 <Label className="text-[#616161] text-sm text-center pt-2" text='Vizualize o total de sorteados por categoria' />
             </View>
-          {apartament.length > 0 &&  <View className="p-2 justify-center items-center bg-[#EEA651] w-12 h-12 rounded-full" style={{position : 'absolute', bottom : 5 ,right : 10, zIndex : 1}}>
-            <FontAwesome name="download" size={24} color="black"  onPress={()=>generatePDF(apartament)} />
+          {apartament.length > 0 &&  <View className="p-2 justify-center items-center bg-[#000] w-12 h-12 rounded-full" style={{position : 'absolute', bottom : 5 ,right : 10, zIndex : 1}}>
+            <FontAwesome name="download" size={24} color="#FFF"  onPress={()=>generatePDF(apartament)} />
             </View>}
      <View className="my-4">
      <List />

@@ -85,8 +85,8 @@ export default function Page() {
     {searchingData.length < 1  &&  <CandidateList />}
   
     </ScrollView>
-    <TouchableOpacity onPress={handleLogout} className='p-2 justify-center items-center bg-[#f8bbd0] rounded-full' style={{position: 'absolute',zIndex: 1, bottom : 20, right : 20}}>
-            <AntDesign name="logout" size={24} color="black" />
+    <TouchableOpacity onPress={handleLogout} className='p-2 justify-center items-center bg-[#000] rounded-full' style={{position: 'absolute',zIndex: 1, bottom : 20, right : 20}}>
+            <AntDesign name="logout" size={24} color="#FFF" />
             </TouchableOpacity>
     </View>
   )
