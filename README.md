@@ -37,7 +37,7 @@ O **Kilemba App** é uma aplicação desenvolvida em **React Native** e **Fireba
    ```
 
 3. **Configuração do Firebase**:
-   - Adicione suas credenciais do Firebase no arquivo de configuração apropriado (`firebaseConfig.js`).
+   - Adicione suas credenciais do Firebase no arquivo de configuração apropriado (`.env`).
    - Configure as regras de segurança no Firebase Firestore e Firebase Authentication conforme as necessidades da aplicação.
 
 4. **Execute o aplicativo**:
