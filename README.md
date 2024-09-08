@@ -81,6 +81,4 @@ Contribuições são bem-vindas! Sinta-se à vontade para abrir um `pull request
 
 Este projeto é licenciado sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
----
 
-Este README oferece uma visão detalhada e profissional do seu aplicativo, destacando suas principais funcionalidades e orientando os usuários e administradores sobre como utilizar a plataforma.
