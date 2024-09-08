@@ -148,14 +148,15 @@ export default function Selected(){
         },[]);
 
     return (
-        <ScrollView className="Flex-1">
+      <View className="flex-1 relative" style={{position: 'relative'}}>
+        <ScrollView className="flex-1">
+        
+           
                 <View className='flex-1 items-center pt-12 px-4'>
                 <Title className="text-[#000929] text-2xl font-semiBoldPopins">Sorteados</Title>
                 <Label className="text-[#616161] text-sm text-center pt-2" text='Vizualize o total de sorteados por categoria' />
             </View>
-          {apartament.length > 0 &&  <View className="p-2 justify-center items-center bg-[#000] w-12 h-12 rounded-full" style={{position : 'absolute', bottom : 5 ,right : 10, zIndex : 1}}>
-            <FontAwesome name="download" size={24} color="#FFF"  onPress={()=>generatePDF(apartament)} />
-            </View>}
+         
      <View className="my-4">
      <List />
      </View>
@@ -169,11 +170,17 @@ export default function Selected(){
         <SearchList candidatos={searchingData} clean={()=>setSearchingData([])} />
         :
         <View className="w-full">
-        { apartament.length > 0 ? <SearchList candidatos={apartament} clean={()=>setApartament([])} /> :  <CandidateList />}
+        { apartament.length > 0 ? <SearchList candidatos={apartament} clean={()=>setApartament([])} /> :  <CandidateList />
+        }
                 </View>
                 }
+                
                 </View>
         </ScrollView>
-
+         
+      {apartament.length > 0 &&  <TouchableOpacity className="p-2 justify-center items-center bg-[#000] w-12 h-12 rounded-full" style={{position : 'absolute', bottom : 10 ,right : 10, zIndex : 1}}>
+            <FontAwesome name="download" size={24} color="#FFF"  onPress={()=>generatePDF(apartament)} />
+            </TouchableOpacity>}
+        </View>
     );
 }

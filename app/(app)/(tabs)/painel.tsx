@@ -18,7 +18,7 @@ import {
     and
   } from 'firebase/firestore';
   import {useState, useEffect} from 'react';
-import { TouchableOpacity } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 import { ScrollView, View } from 'react-native';
 
 export default function Painel(){
@@ -225,57 +225,54 @@ export default function Painel(){
    
    },[]);
     return(
-        <ScrollView className='flex-1' showsVerticalScrollIndicator={false}>
-          {getAdmin === 'globof129@gmail.com' ?<>  <View className='flex-1 items-center pt-12 px-4'>
-                <Title className="text-[#000929] text-2xl font-semiBoldPopins">Painel de Gestão</Title>
-                <Label className="text-[#616161] text-sm text-center pt-2" text='Administre o sistema com responsabilidade e a justiça virá em bónus' />
-            </View>
-            <View className="flex-row flex-wrap justify-evenly items-center mt-10">
-    
+      <ScrollView className='flex-1' showsVerticalScrollIndicator={false}>
+      {getAdmin === 'globof129@gmail.com' ? (
+        <View>
+          <View className='flex-1 items-center pt-12 px-4'>
+            <Title className="text-[#000929] text-2xl font-semiBoldPopins">Painel de Gestão</Title>
+            <Text className="text-[#616161] text-sm text-center pt-2">Administre o sistema com responsabilidade e a justiça virá em bónus</Text>
+          </View>
+          <View className="flex-row flex-wrap justify-evenly items-center mt-10">
             <View className={`items-center mt-1 p-2 rounded-md ${sorteiodeApartamentosRealizado ? 'bg-[#478FF1]' : 'bg-[#B9B9B9]'}`}>
-    <TouchableOpacity className={`items-center`}  disabled={sorteiodeApartamentosRealizado} onPress={() => FazerSorteioApartamentos()}>
-   <Label text="Apartamentos" className="font-regularPopins text-sm"/>
-    </TouchableOpacity>
-    </View> 
-
-    <View className={`items-center mt-1 p-2 rounded-md ${sorteiodeVivendasInsoladasRealizado ? 'bg-[#478FF1]' : 'bg-[#B9B9B9]'}`}>
-    <TouchableOpacity className={`items-center`}   disabled={sorteiodeVivendasInsoladasRealizado} onPress={()=>FazerSorteioVivendasInsoladas()}>
-   <Label text="Insoladas" className="font-regularPopins text-sm"/>
-    </TouchableOpacity>
-    </View> 
-
-    <View className={`items-center mt-1 p-2 rounded-md ${sorteiodeVivendasGeminadasRealizado ? 'bg-[#478FF1]' : 'bg-[#B9B9B9]'}`}>
-    <TouchableOpacity className={`items-center`}   disabled={sorteiodeVivendasGeminadasRealizado} onPress={()=>FazerSorteioVivendasGeminadas()}>
-   <Label text="Geminadas" className="font-regularPopins text-sm"/>
-    </TouchableOpacity>
-    </View> 
-    
-    <View className='flex-row justify-between'>
-    <PainelCard 
-  tipo='Apartamentos' 
-  total={apartamentos.length}
-   porcentagem={ ((apartamentos.length/candidatos.length ) * 100).toFixed(2) } />
-
-  <PainelCard 
-  tipo='Vivendas Geminadas' 
-  total={vivendasGeminadas.length}
-   porcentagem={((vivendasGeminadas.length/candidatos.length ) * 100).toFixed(2) } />
-
-   <PainelCard 
-   tipo='Vivendas Insoladas'
-    total={vivendasInsoladas.length}
-      porcentagem={((vivendasInsoladas.length/candidatos.length ) * 100).toFixed(2) } />
-    </View>
-    <View className='w-full'>
-    <CandidateList />
-    </View>
-    </View></>
-    :  <View className="flex-1 justify-center items-center pt-64">
-      <Title className="text-[#000929] text-2xl font-semiBoldPopins">Indisponível</Title>
-        <Label text='Área Restricta' className='text-[#8C8C8C] text-lg' />
-      </View>
-      }
-
-        </ScrollView>
+              <TouchableOpacity className={`items-center`} disabled={sorteiodeApartamentosRealizado} onPress={() => FazerSorteioApartamentos()}>
+                <Text className="font-regularPopins text-sm">Apartamentos</Text>
+              </TouchableOpacity>
+            </View>
+            <View className={`items-center mt-1 p-2 rounded-md ${sorteiodeVivendasInsoladasRealizado ? 'bg-[#478FF1]' : 'bg-[#B9B9B9]'}`}>
+              <TouchableOpacity className={`items-center`} disabled={sorteiodeVivendasInsoladasRealizado} onPress={()=>FazerSorteioVivendasInsoladas()}>
+                <Text className="font-regularPopins text-sm">Insoladas</Text>
+              </TouchableOpacity>
+            </View>
+            <View className={`items-center mt-1 p-2 rounded-md ${sorteiodeVivendasGeminadasRealizado ? 'bg-[#478FF1]' : 'bg-[#B9B9B9]'}`}>
+              <TouchableOpacity className={`items-center`} disabled={sorteiodeVivendasGeminadasRealizado} onPress={()=>FazerSorteioVivendasGeminadas()}>
+                <Text className="font-regularPopins text-sm">Geminadas</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+          <View className='flex-row justify-between'>
+            <PainelCard 
+              tipo='Apartamentos' 
+              total={apartamentos.length}
+              porcentagem={ ((apartamentos.length/candidatos.length ) * 100).toFixed(2) } />
+            <PainelCard 
+              tipo='Vivendas Geminadas' 
+              total={vivendasGeminadas.length}
+              porcentagem={((vivendasGeminadas.length/candidatos.length ) * 100).toFixed(2) } />
+            <PainelCard 
+              tipo='Vivendas Insoladas'
+              total={vivendasInsoladas.length}
+              porcentagem={((vivendasInsoladas.length/candidatos.length ) * 100).toFixed(2) } />
+          </View>
+          <View className='w-full'>
+            <CandidateList />
+          </View>
+        </View>
+      ) : (
+        <View className="flex-1 justify-center items-center pt-64">
+          <Title className="text-[#000929] text-2xl font-semiBoldPopins">Indisponível</Title>
+          <Text className='text-[#8C8C8C] text-lg'>Área Restricta</Text>
+        </View>
+      )}
+    </ScrollView>
     );
 }
