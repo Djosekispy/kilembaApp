@@ -27,7 +27,7 @@ O **Kilemba App** é uma aplicação desenvolvida em **React Native** e **Fireba
 
 1. **Clone o repositório**:
    ```bash
-   git [ttps://github.com/Djosekispy/kilembaApp.git]
+   git [https://github.com/Djosekispy/kilembaApp.git]
    cd kilembaApp
    ```
 
