@@ -8,12 +8,12 @@ import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBsQ3339Z_UadiOsKsPGdOp0LHEuMqsOEU",
-  authDomain: "kilemba-df33a.firebaseapp.com",
-  projectId: "kilemba-df33a",
-  storageBucket: "kilemba-df33a.appspot.com",
-  messagingSenderId: "877784344083",
-  appId: "1:877784344083:web:da5492792babbf52f3c1e6"
+  apiKey: process.env.API_KEY,
+  authDomain: process.env.AUTH_DOMAIN,
+  projectId: process.env.PROJECT_ID,
+  storageBucket: process.env.STORAGE_BUCKET,
+  messagingSenderId: process.env.MESSAGING_SNEDER_ID,
+  appId: process.env.APP_ID,
 };
 
 const app = initializeApp(firebaseConfig);
