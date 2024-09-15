@@ -47,7 +47,7 @@ O **Kilemba App** é uma aplicação desenvolvida em **React Native** e **Fireba
 
 ## Publicação
 
-A versão APK já foi gerada e está disponível para download. [Clique aqui para baixar](https://expo.dev/artifacts/eas/7rWbVb8nmi5V5N8LcJHWhc.apk).
+A versão APK já foi gerada e está disponível para download. [Clique aqui para baixar](https://expo.dev/artifacts/eas/hQLwXhs7VXaoTUrmuQpoSu.apk).
 
 ## Uso
 
